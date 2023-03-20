@@ -1,27 +1,35 @@
 name: synnet
 channels:
   - pytorch
-  # - dglteam # only needed for gin
+  - nvidia
   - conda-forge
 dependencies:
   - python=3.9.*
-  - pytorch::torchvision
-  - pytorch::pytorch=1.9.*
+  - pytorch
+  - torchvision
+  - pytorch-cuda=11.7
   - pytorch-lightning
-  - rdkit=2021.03.*
-  # - dglteam::dgl-cuda11.1 # only needed for gin
-  - pytdc
+  - rdkit=2022.03.*
+  - datamol
+  - pytdc<0.3.8 # https://github.com/mims-harvard/TDC/issues/180
   - scikit-learn>=1.1.*
-  - ipykernel=6.15.*
+  - numba
+  - ipykernel
+  - ipywidgets # Silence warning, see https://github.com/tqdm/tqdm/issues/187
   - nb_conda_kernels
+  - pre-commit
   - black=22.6.*
   - black-jupyter=22.6.*
   - isort=5.10.*
+  - pytest
   - pip
   - pip:
     - setuptools==59.5.0 # https://github.com/pytorch/pytorch/issues/69894
-#    - dgllife # only needed for gin, will force scikit-learn < 1.0
     - pathos
     - rich
     - pyyaml
     - fcd_torch # for evaluators in pytdc
+    - wandb
+    - tabulate # for df.to_markdown()
+    
+  #From chrulm/synnet fork
