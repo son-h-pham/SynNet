@@ -145,7 +145,13 @@ class Sdf2SmilesExtractor:
         """
         file = str(Path(file).resolve())
         suppl = Chem.SDMolSupplier(file)
-        self.smiles = (Chem.MolToSmiles(mol, canonical=True, isomericSmiles=False) for mol in suppl)
+        #self.smiles = (Chem.MolToSmiles(mol, canonical=True, isomericSmiles=False) for mol in suppl)
+        self.smiles = []
+        for mol in suppl:
+        	try:
+        		self.smiles.append(Chem.MolToSmiles(mol, canonical=True, isomericSmiles=False))
+        	except:
+        		print('An error has occurred')
         logger.info(f"Read data from {file}")
 
         return self
